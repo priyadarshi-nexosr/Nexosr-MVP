@@ -28,7 +28,9 @@ db = client[os.environ.get('DB_NAME', 'nexosr_db')]
 EMERGENT_LLM_KEY = "sk-emergent-09538C92b582341C2B"
 openai_client = OpenAI(
     api_key=EMERGENT_LLM_KEY,
-    base_url="https://emergentintegrations.ai/api/v1/llm"
+    base_url="https://emergentintegrations.ai/api/v1/llm",
+    timeout=30.0,
+    max_retries=2
 )
 
 # JWT Configuration
