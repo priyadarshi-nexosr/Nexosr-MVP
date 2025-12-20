@@ -260,14 +260,14 @@ export default function DashboardScreen() {
           </>
         )}
 
-        {/* Premium CTA for free users */}
-        {!user?.is_premium && (
+        {/* Premium CTA for free users (only show after trial ends) */}
+        {!dashboard?.premium_status?.has_premium_access && (
           <Card style={styles.premiumCta} variant="outlined">
             <View style={styles.premiumCtaContent}>
               <Ionicons name="diamond" size={40} color={COLORS.primary} />
               <View style={styles.premiumCtaText}>
-                <Text style={styles.premiumCtaTitle}>Unlock Premium</Text>
-                <Text style={styles.premiumCtaDesc}>Unlimited tests, AI insights & mentor sessions</Text>
+                <Text style={styles.premiumCtaTitle}>Your Trial Has Ended</Text>
+                <Text style={styles.premiumCtaDesc}>Upgrade to keep unlimited access to all features</Text>
               </View>
             </View>
             <Button title="Upgrade Now" onPress={() => router.push('/premium')} size="medium" />
