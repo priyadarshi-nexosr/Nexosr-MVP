@@ -86,7 +86,9 @@ export default function AssessmentsScreen() {
     });
   };
 
-  const freeTestsRemaining = user?.is_premium ? 'Unlimited' : `${Math.max(0, 2 - history.length)} remaining`;
+  // Check if user has premium access (trial or paid)
+  const hasPremiumAccess = user?.is_premium || (user?.trial_start && 
+    new Date(user.trial_start).getTime() + 15 * 24 * 60 * 60 * 1000 > Date.now());
 
   return (
     <SafeAreaView style={styles.container}>
@@ -99,13 +101,26 @@ export default function AssessmentsScreen() {
           </View>
         </View>
 
-        {/* Free tier info */}
-        {!user?.is_premium && (
+        {/* Trial Banner */}
+        {!user?.is_premium && hasPremiumAccess && (
+          <Card style={styles.trialCard}>
+            <View style={styles.tierContent}>
+              <Ionicons name="gift" size={24} color={COLORS.success} />
+              <View style={styles.tierText}>
+                <Text style={styles.trialTitle}>Free Trial Active</Text>
+                <Text style={styles.trialDesc}>Take unlimited tests during your 15-day trial!</Text>
+              </View>
+            </View>
+          </Card>
+        )}
+
+        {/* Free tier info (only show if trial expired) */}
+        {!hasPremiumAccess && (
           <Card style={styles.tierCard}>
             <View style={styles.tierContent}>
               <Ionicons name="information-circle" size={24} color={COLORS.info} />
               <View style={styles.tierText}>
-                <Text style={styles.tierTitle}>Free Plan: {freeTestsRemaining}</Text>
+                <Text style={styles.tierTitle}>Trial Ended</Text>
                 <Text style={styles.tierDesc}>Upgrade to Premium for unlimited tests and detailed reports</Text>
               </View>
             </View>
