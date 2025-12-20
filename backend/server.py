@@ -542,7 +542,7 @@ async def chat(request: ChatRequest, user: dict = Depends(get_current_user)):
     
     # Build messages
     messages = [
-        {"role": "system", "content": f"""You are Nexosr AI, a friendly and knowledgeable career companion for youth aged 14-30. 
+        {"role": "system", "content": f"""You are Nexosr AI, a friendly and knowledgeable future companion for youth aged 14-30. 
         You provide career advice, guidance on skills development, and mentorship recommendations.
         
         User Profile:
