@@ -71,6 +71,7 @@ class User(BaseModel):
     goals: str = ""
     language: str = "en"
     is_premium: bool = False
+    trial_start: datetime = Field(default_factory=datetime.utcnow)  # 15-day free trial
     xp_points: int = 0
     badges: List[str] = []
     created_at: datetime = Field(default_factory=datetime.utcnow)
