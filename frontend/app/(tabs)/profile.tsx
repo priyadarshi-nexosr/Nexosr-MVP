@@ -182,14 +182,30 @@ export default function ProfileScreen() {
         </Card>
 
         {/* Logout */}
-        <Button
-          title="Logout"
-          onPress={handleLogout}
-          variant="outline"
-          size="large"
+        <TouchableOpacity
           style={styles.logoutButton}
-          icon={<Ionicons name="log-out" size={20} color={COLORS.primary} />}
-        />
+          onPress={() => {
+            Alert.alert(
+              'Logout',
+              'Are you sure you want to logout?',
+              [
+                { text: 'Cancel', style: 'cancel' },
+                {
+                  text: 'Logout',
+                  style: 'destructive',
+                  onPress: () => {
+                    logout().then(() => {
+                      router.replace('/(auth)/welcome');
+                    });
+                  },
+                },
+              ]
+            );
+          }}
+        >
+          <Ionicons name="log-out" size={20} color={COLORS.primary} />
+          <Text style={styles.logoutText}>Logout</Text>
+        </TouchableOpacity>
 
         <Text style={styles.versionText}>Nexosr v1.0.0</Text>
       </ScrollView>
