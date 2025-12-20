@@ -1,7 +1,7 @@
 export const translations: Record<string, Record<string, string>> = {
   en: {
     welcome: 'Welcome to',
-    tagline: 'Your AI-Powered Future Companion',
+    tagline: 'Your Smart Future Companion',
     login: 'Login',
     register: 'Register',
     email: 'Email',
