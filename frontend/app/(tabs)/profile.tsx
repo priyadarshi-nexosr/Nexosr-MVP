@@ -13,7 +13,7 @@ export default function ProfileScreen() {
   const { user, logout } = useAuthStore();
   const [language, setLanguage] = useState(user?.language || 'en');
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     Alert.alert(
       'Logout',
       'Are you sure you want to logout?',
@@ -23,11 +23,15 @@ export default function ProfileScreen() {
           text: 'Logout',
           style: 'destructive',
           onPress: async () => {
-            await logout();
-            // Navigate to welcome screen after logout
-            setTimeout(() => {
+            try {
+              await logout();
+              // Force navigation to welcome screen
               router.replace('/(auth)/welcome');
-            }, 100);
+            } catch (error) {
+              console.error('Logout error:', error);
+              // Even if logout fails, navigate to welcome
+              router.replace('/(auth)/welcome');
+            }
           },
         },
       ]
