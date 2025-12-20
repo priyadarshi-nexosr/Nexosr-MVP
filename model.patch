@@ -1,13 +1,31 @@
 diff --git a/frontend/src/constants/translations.ts b/frontend/src/constants/translations.ts
-index 0ff8e73..0f3f2d5 100644
+index 707dbc1..cd81b2e 100644
 --- a/frontend/src/constants/translations.ts
 +++ b/frontend/src/constants/translations.ts
 @@ -30,7 +30,7 @@ export const translations: Record<string, Record<string, string>> = {
    },
    hi: {
      welcome: 'आपका स्वागत है',
--    tagline: 'आपका AI-संचालित करियर साथी',
-+    tagline: 'आपका AI-संचालित भविष्य साथी',
+-    tagline: 'आपका AI-संचालित भविष्य साथी',
++    tagline: 'आपका स्मार्ट भविष्य साथी',
      login: 'लॉगिन',
      register: 'रजिस्टर',
      email: 'ईमेल',
+diff --git a/model.patch b/model.patch
+index a36ad7d..e69de29 100644
+--- a/model.patch
++++ b/model.patch
+@@ -1,13 +0,0 @@
+-diff --git a/frontend/src/constants/translations.ts b/frontend/src/constants/translations.ts
+-index 0ff8e73..0f3f2d5 100644
+---- a/frontend/src/constants/translations.ts
+-+++ b/frontend/src/constants/translations.ts
+-@@ -30,7 +30,7 @@ export const translations: Record<string, Record<string, string>> = {
+-   },
+-   hi: {
+-     welcome: 'आपका स्वागत है',
+--    tagline: 'आपका AI-संचालित करियर साथी',
+-+    tagline: 'आपका AI-संचालित भविष्य साथी',
+-     login: 'लॉगिन',
+-     register: 'रजिस्टर',
+-     email: 'ईमेल',
