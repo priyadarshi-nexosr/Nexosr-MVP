@@ -175,6 +175,8 @@ class Payment(BaseModel):
 
 # ==================== HELPER FUNCTIONS ====================
 
+TRIAL_DAYS = 15  # 15-day free premium trial
+
 def get_user_segment(age: int) -> str:
     if age < 19:
         return "student"
@@ -182,6 +184,35 @@ def get_user_segment(age: int) -> str:
         return "graduate"
     else:
         return "professional"
+
+def has_premium_access(user: dict) -> bool:
+    """Check if user has premium access (either paid or trial)"""
+    if user.get("is_premium", False):
+        return True
+    
+    # Check trial period
+    trial_start = user.get("trial_start")
+    if trial_start:
+        if isinstance(trial_start, str):
+            trial_start = datetime.fromisoformat(trial_start.replace('Z', '+00:00'))
+        trial_end = trial_start + timedelta(days=TRIAL_DAYS)
+        if datetime.utcnow() < trial_end:
+            return True
+    return False
+
+def get_trial_days_remaining(user: dict) -> int:
+    """Get remaining trial days for user"""
+    if user.get("is_premium", False):
+        return -1  # Paid premium, no trial needed
+    
+    trial_start = user.get("trial_start")
+    if trial_start:
+        if isinstance(trial_start, str):
+            trial_start = datetime.fromisoformat(trial_start.replace('Z', '+00:00'))
+        trial_end = trial_start + timedelta(days=TRIAL_DAYS)
+        remaining = (trial_end - datetime.utcnow()).days
+        return max(0, remaining)
+    return 0
 
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
