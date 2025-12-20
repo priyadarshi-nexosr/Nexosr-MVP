@@ -24,11 +24,13 @@ export default function RootLayout() {
     if (!isReady) return;
 
     const inAuthGroup = segments[0] === '(auth)';
-    const inTabsGroup = segments[0] === '(tabs)';
 
+    // If not authenticated and not in auth group, redirect to welcome
     if (!isAuthenticated && !inAuthGroup) {
       router.replace('/(auth)/welcome');
-    } else if (isAuthenticated && inAuthGroup) {
+    } 
+    // If authenticated and in auth group, redirect to dashboard
+    else if (isAuthenticated && inAuthGroup) {
       router.replace('/(tabs)/dashboard');
     }
   }, [isAuthenticated, segments, isReady]);
