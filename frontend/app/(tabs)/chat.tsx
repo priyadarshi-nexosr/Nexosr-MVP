@@ -97,7 +97,7 @@ export default function ChatScreen() {
             </View>
             <View>
               <Text style={styles.headerTitle}>Nexosr AI</Text>
-              <Text style={styles.headerSubtitle}>Your Career Companion</Text>
+              <Text style={styles.headerSubtitle}>Your Future Companion</Text>
             </View>
           </View>
           {!user?.is_premium && (
