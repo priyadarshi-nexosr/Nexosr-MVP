@@ -362,8 +362,8 @@ async def get_me(user: dict = Depends(get_current_user)):
 
 @api_router.post("/assessments/start")
 async def start_assessment(test_type: str = Query(...), user: dict = Depends(get_current_user)):
-    # Check limits for free users
-    if not user.get("is_premium", False):
+    # Check limits for free users (premium users and trial users get unlimited)
+    if not has_premium_access(user):
         user_tests = await db.assessments.count_documents({"user_id": user["id"], "completed": True})
         if user_tests >= 2:
             raise HTTPException(status_code=403, detail="Free users can only take 2 tests. Upgrade to Premium!")
