@@ -91,12 +91,17 @@ export default function DashboardScreen() {
             <Text style={styles.greeting}>{getGreeting()}</Text>
             <View style={styles.nameRow}>
               <Text style={styles.userName}>{user?.name || 'User'}</Text>
-              {user?.is_premium && (
+              {dashboard?.premium_status?.is_paid_premium ? (
                 <View style={styles.premiumBadge}>
                   <Ionicons name="star" size={12} color={COLORS.gold} />
                   <Text style={styles.premiumText}>PRO</Text>
                 </View>
-              )}
+              ) : dashboard?.premium_status?.is_trial ? (
+                <View style={styles.trialBadge}>
+                  <Ionicons name="gift" size={12} color={COLORS.success} />
+                  <Text style={styles.trialText}>TRIAL</Text>
+                </View>
+              ) : null}
             </View>
           </View>
           <View style={styles.headerRight}>
@@ -108,6 +113,34 @@ export default function DashboardScreen() {
             </View>
           </View>
         </View>
+
+        {/* Trial Banner */}
+        {dashboard?.premium_status?.is_trial && (
+          <Card style={styles.trialCard}>
+            <View style={styles.trialCardContent}>
+              <View style={styles.trialCardIcon}>
+                <Ionicons name="gift" size={28} color={COLORS.success} />
+              </View>
+              <View style={styles.trialCardText}>
+                <Text style={styles.trialCardTitle}>15-Day Free Premium Trial</Text>
+                <Text style={styles.trialCardDays}>
+                  {dashboard.premium_status.trial_days_remaining} days remaining
+                </Text>
+              </View>
+            </View>
+            <View style={styles.trialProgressBar}>
+              <View 
+                style={[
+                  styles.trialProgressFill, 
+                  { width: `${((15 - dashboard.premium_status.trial_days_remaining) / 15) * 100}%` }
+                ]} 
+              />
+            </View>
+            <Text style={styles.trialCardFeatures}>
+              Unlimited tests, AI reports & mentor access
+            </Text>
+          </Card>
+        )}
 
         {/* XP Card */}
         <Card style={styles.xpCard}>
