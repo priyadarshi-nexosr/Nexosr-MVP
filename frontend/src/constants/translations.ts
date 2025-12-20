@@ -30,7 +30,7 @@ export const translations: Record<string, Record<string, string>> = {
   },
   hi: {
     welcome: 'आपका स्वागत है',
-    tagline: 'आपका AI-संचालित करियर साथी',
+    tagline: 'आपका AI-संचालित भविष्य साथी',
     login: 'लॉगिन',
     register: 'रजिस्टर',
     email: 'ईमेल',
