@@ -212,6 +212,22 @@ const styles = StyleSheet.create({
     color: COLORS.textSecondary,
     marginTop: 4,
   },
+  trialCard: {
+    marginBottom: SPACING.lg,
+    backgroundColor: `${COLORS.success}10`,
+    borderColor: COLORS.success,
+    borderWidth: 1,
+  },
+  trialTitle: {
+    fontSize: FONT_SIZES.md,
+    fontWeight: '600',
+    color: COLORS.success,
+  },
+  trialDesc: {
+    fontSize: FONT_SIZES.sm,
+    color: COLORS.textSecondary,
+    marginTop: 2,
+  },
   tierCard: {
     marginBottom: SPACING.lg,
     backgroundColor: `${COLORS.info}10`,
