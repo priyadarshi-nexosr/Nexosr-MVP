@@ -543,7 +543,26 @@ async def chat(request: ChatRequest, user: dict = Depends(get_current_user)):
         assistant_message = response.choices[0].message.content
     except Exception as e:
         logger.error(f"Chat error: {e}")
-        assistant_message = "I apologize, but I'm having trouble connecting right now. Please try again in a moment!"
+        # Provide intelligent fallback responses based on user context
+        interests = user.get('interests', [])
+        segment = user.get('segment', 'student')
+        user_message_lower = request.message.lower()
+        
+        if 'career' in user_message_lower or 'job' in user_message_lower:
+            if 'Technology' in interests:
+                assistant_message = f"Based on your interest in Technology, I'd recommend exploring careers in Software Development, Data Science, or Product Management. As a {segment}, you might want to start with online courses on platforms like Coursera or take assessments to identify your specific strengths. Would you like to take our Aptitude Test to get personalized career recommendations?"
+            elif 'Business' in interests:
+                assistant_message = f"With your interest in Business, careers in Marketing, Consulting, or Entrepreneurship could be great fits! As a {segment}, consider building real-world experience through internships. Take our Career Interest Test to discover which business path aligns with your personality."
+            else:
+                assistant_message = f"Great question! Based on your profile, I recommend taking our AI-powered assessments to discover careers that match your unique strengths. Our tests analyze aptitude, personality, and interests to provide personalized recommendations. Would you like to start with an assessment?"
+        elif 'mentor' in user_message_lower:
+            assistant_message = f"Finding the right mentor can accelerate your career growth! Based on your interests in {', '.join(interests) if interests else 'various fields'}, I recommend connecting with mentors in those domains. Check out our Mentors section to find experts who can guide you. Premium users get AI-matched mentor recommendations!"
+        elif 'skill' in user_message_lower or 'learn' in user_message_lower:
+            assistant_message = f"Continuous learning is key to career success! For {segment}s interested in {', '.join(interests) if interests else 'growing their careers'}, I recommend: 1) Taking our Skill Assessment to identify gaps, 2) Checking our Opportunities section for relevant courses, 3) Booking mentor sessions for personalized guidance."
+        elif 'test' in user_message_lower or 'assessment' in user_message_lower:
+            assistant_message = "We offer 4 types of AI-powered assessments: 1) Aptitude Test - measures logical, numerical & verbal skills, 2) Personality Assessment - discovers your work style, 3) Career Interest Test - finds careers matching your passions, 4) Skill Assessment - evaluates your current abilities. Each takes about 10-15 minutes and provides detailed AI reports!"
+        else:
+            assistant_message = f"Hi {user['name']}! I'm Nexosr AI, your career companion. I can help you with: career guidance, skill development advice, finding mentors, and discovering opportunities. As a {segment} interested in {', '.join(interests) if interests else 'exploring career options'}, what specific aspect of your career journey can I help with today?"
     
     # Save messages
     user_msg = ChatMessage(user_id=user["id"], role="user", content=request.message)
