@@ -594,7 +594,7 @@ async def chat(request: ChatRequest, user: dict = Depends(get_current_user)):
         elif 'test' in user_message_lower or 'assessment' in user_message_lower:
             assistant_message = "We offer 4 types of AI-powered assessments: 1) Aptitude Test - measures logical, numerical & verbal skills, 2) Personality Assessment - discovers your work style, 3) Career Interest Test - finds careers matching your passions, 4) Skill Assessment - evaluates your current abilities. Each takes about 10-15 minutes and provides detailed AI reports!"
         else:
-            assistant_message = f"Hi {user['name']}! I'm Nexosr AI, your career companion. I can help you with: career guidance, skill development advice, finding mentors, and discovering opportunities. As a {segment} interested in {', '.join(interests) if interests else 'exploring career options'}, what specific aspect of your career journey can I help with today?"
+            assistant_message = f"Hi {user['name']}! I'm Nexosr AI, your future companion. I can help you with: career guidance, skill development advice, finding mentors, and discovering opportunities. As a {segment} interested in {', '.join(interests) if interests else 'exploring career options'}, what specific aspect of your career journey can I help with today?"
     
     # Save messages
     user_msg = ChatMessage(user_id=user["id"], role="user", content=request.message)
