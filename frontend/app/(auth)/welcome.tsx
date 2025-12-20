@@ -29,7 +29,7 @@ export default function WelcomeScreen() {
             </View>
             <Text style={styles.logoText}>NEXOSR</Text>
           </View>
-          <Text style={styles.tagline}>Your AI-Powered Future Companion</Text>
+          <Text style={styles.tagline}>Your Smart Future Companion</Text>
           <Text style={styles.subtitle}>For Youth Aged 14-30</Text>
         </View>
 
