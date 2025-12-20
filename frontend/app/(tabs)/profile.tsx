@@ -24,7 +24,10 @@ export default function ProfileScreen() {
           style: 'destructive',
           onPress: async () => {
             await logout();
-            router.replace('/(auth)/welcome');
+            // Navigate to welcome screen after logout
+            setTimeout(() => {
+              router.replace('/(auth)/welcome');
+            }, 100);
           },
         },
       ]
