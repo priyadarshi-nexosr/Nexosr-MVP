@@ -430,7 +430,22 @@ const styles = StyleSheet.create({
     color: COLORS.text,
   },
   logoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SPACING.sm,
     marginTop: SPACING.lg,
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.lg,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: COLORS.primary,
+    backgroundColor: 'transparent',
+  },
+  logoutText: {
+    color: COLORS.primary,
+    fontSize: FONT_SIZES.md,
+    fontWeight: '600',
   },
   versionText: {
     textAlign: 'center',
