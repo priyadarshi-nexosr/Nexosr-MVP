@@ -849,6 +849,10 @@ async def get_dashboard(user: dict = Depends(get_current_user)):
             skill_gaps.extend(a["ai_report"].get("skill_gaps", []))
     skill_gaps = list(set(skill_gaps))[:5]
     
+    # Calculate trial info
+    trial_days_remaining = get_trial_days_remaining(user)
+    has_premium = has_premium_access(user)
+    
     return {
         "user": {k: v for k, v in user.items() if k not in ["password_hash", "_id"]},
         "stats": {
@@ -866,7 +870,13 @@ async def get_dashboard(user: dict = Depends(get_current_user)):
             {k: v for k, v in s.items() if k != "_id"}
             for s in sessions
             if s.get("status") in ["pending", "confirmed"]
-        ][:3]
+        ][:3],
+        "premium_status": {
+            "has_premium_access": has_premium,
+            "is_paid_premium": user.get("is_premium", False),
+            "is_trial": has_premium and not user.get("is_premium", False),
+            "trial_days_remaining": trial_days_remaining
+        }
     }
 
 # ==================== ADMIN ROUTES ====================
