@@ -124,12 +124,22 @@ export default function DashboardScreen() {
             </View>
           </View>
           <View style={styles.headerRight}>
-            <View style={[styles.segmentBadge, { backgroundColor: `${getSegmentBadge(user?.segment || 'student').color}20` }]}>
-              <Ionicons name={getSegmentBadge(user?.segment || 'student').icon as any} size={14} color={getSegmentBadge(user?.segment || 'student').color} />
-              <Text style={[styles.segmentText, { color: getSegmentBadge(user?.segment || 'student').color }]}>
-                {(user?.segment || 'student').charAt(0).toUpperCase() + (user?.segment || 'student').slice(1)}
-              </Text>
-            </View>
+            <TouchableOpacity 
+              style={styles.logoutIconButton}
+              onPress={handleLogout}
+            >
+              <Ionicons name="log-out-outline" size={22} color={COLORS.textSecondary} />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Segment Badge */}
+        <View style={styles.segmentRow}>
+          <View style={[styles.segmentBadge, { backgroundColor: `${getSegmentBadge(user?.segment || 'student').color}20` }]}>
+            <Ionicons name={getSegmentBadge(user?.segment || 'student').icon as any} size={14} color={getSegmentBadge(user?.segment || 'student').color} />
+            <Text style={[styles.segmentText, { color: getSegmentBadge(user?.segment || 'student').color }]}>
+              {(user?.segment || 'student').charAt(0).toUpperCase() + (user?.segment || 'student').slice(1)}
+            </Text>
           </View>
         </View>
 
