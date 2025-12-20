@@ -26,6 +26,12 @@ interface DashboardData {
   badges: string[];
   recent_assessments: any[];
   upcoming_sessions: any[];
+  premium_status?: {
+    has_premium_access: boolean;
+    is_paid_premium: boolean;
+    is_trial: boolean;
+    trial_days_remaining: number;
+  };
 }
 
 export default function DashboardScreen() {
