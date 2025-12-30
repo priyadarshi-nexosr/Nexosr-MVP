@@ -64,7 +64,7 @@ export default function WelcomeScreen() {
           <Text style={styles.heroTitle}>Shape Your{'\n'}Future Today</Text>
           <Text style={styles.heroSubtitle}>Your Smart Future Companion</Text>
           <Text style={styles.heroDescription}>
-            AI-powered career guidance platform designed for ambitious youth aged 14-30
+            A Human+AI-powered Youth Companion Platform to discover, design, and drive your future with clarity.
           </Text>
 
           {/* Hero CTA */}
